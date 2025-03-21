@@ -9,9 +9,13 @@ async function getSongs() {
     let songs = [];
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
-        if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/songs/")[1])
-        }
+       if (element.href.endsWith(".mp3")) {
+    const splitPath = element.href.includes("/songs/") 
+        ? element.href.split("/songs/")[1] 
+        : element.href.split("/").pop(); // Fallback: Extract the file name only
+    songs.push(splitPath);
+}
+
 
     }
     return songs
